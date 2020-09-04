@@ -11,5 +11,8 @@ public class FileUtil {
 	    String fileName = filePath.substring(filePath.lastIndexOf("\\")+1);
 	    return time+"."+fileName.substring(filePath.lastIndexOf(".")+1);
 	}
+	private void Test() {
+		
+	}
 
 }
