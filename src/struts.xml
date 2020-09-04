@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+
+
+<!-- 比较详细的配置介绍：https://www.cnblogs.com/wkrbky/p/5889328.html -->
+<struts>
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<constant name="struts.multipart.maxSize" value="102147244" />
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<constant name="struts.objectFactory" value="spring" />
+	
+	<package name="basicstruts" extends="struts-default" namespace="/">
+		<!-- 本地数据导入页面 -->
+		<action name="test" class="action.TestAction" method="test">
+			<result name="show" type="dispatcher">WEB-INF/content/test.jsp</result>
+			<result name="index" type="redirect">index</result>
+		</action>
+		
+		
+		<!-- 主页 -->
+		<action name="index" class="action.IndexAction" method="index">
+			<result name="show" type="dispatcher">WEB-INF/content/index.jsp</result>
+		</action>
+		
+
+				
+		<!-- 分类页面 -->
+		<action name="category" class="action.PgAction" method="categoryList">
+			<result name="succ" >WEB-INF/content/jsp/public/video_list.jsp</result>
+		</action>
+		
+		<!-- 搜索页面 -->
+		<action name="search" class="action.PgAction" method="Search">
+			<result name="succ" >WEB-INF/content/jsp/public/search.jsp</result>
+		</action>
+
+		<!-- 收藏页面 -->
+		<action name="bookmark" class="action.PgAction" method="bookmarkVideo">
+			<result name="succ" >WEB-INF/content/jsp/user/bookmark.jsp</result>
+		</action>
+		
+		
+		<!-- 登录注册注销 -->
+		<action name="sign_in" class="action.UserAction" method="sign_in">
+			<result name="succ">WEB-INF/content/jsp/public/sign_in.jsp</result>
+		</action>
+		<action name="sign_up" class="action.UserAction" method="sign_up">
+			<result name="succ">WEB-INF/content/jsp/public/sign_up.jsp</result>
+		</action>
+
+		<action name="sign_out" class="action.UserAction" method="sign_out">
+			<result name="succ" type="redirect">index</result>
+		</action>
+		
+		
+		<!-- 用户/管理员主页 -->
+		<action name="home" class="action.UserAction" method="UserHome">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="succ" >WEB-INF/content/jsp/user/home.jsp</result>
+		</action>
+		
+		<action name="home_admin" class="action.UserAction" method="AdminHome">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="succ" >WEB-INF/content/jsp/admin/home.jsp</result>
+		</action>
+		
+		
+		<!--  视频上传/修改页 -->
+		<action name="uploadVideo" class="action.VideoAction" method="UploadVideo">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="succ" >WEB-INF/content/jsp/user/manage/uploadVideo.jsp</result>
+		</action>
+		
+		
+		<!-- 视频播放页 -->
+		<action name="video" class="action.VideoAction" method="Video">
+			<result name="index" type="redirect">index</result>
+			<result name="succ" >WEB-INF/content/jsp/public/video.jsp</result>
+			<result name="defend" >WEB-INF/content/jsp/public/defend.jsp</result>
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="vip" type="redirect">vip</result>
+		</action>
+		
+		<!-- 视频编辑页面 -->
+		<action name="updateVideo" class="action.VideoAction" method="updateVideo">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="succ" >WEB-INF/content/jsp/user/manage/updateVideo.jsp</result>
+		</action>
+		
+		
+		<!--  积分中心-->
+		<action name="balance" class="action.UserAction" method="BalanceCenter">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="succ" >WEB-INF/content/jsp/user/balance.jsp</result>
+		</action>
+		
+		
+		<!-- 会员中心 -->
+		<action name="vip" class="action.UserAction" method="VIPCenter">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="succ" >WEB-INF/content/jsp/user/vip.jsp</result>
+		</action>
+		
+		
+
+		<!-- 用户和管理员管理URL相同，但获取到的内容不同 -->
+		<!-- 用户管理 -->
+		<action name="userList" class="action.PgAction" method="manageUser">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="succ" >WEB-INF/content/jsp/admin/user_list.jsp</result>
+		</action>
+		<!-- 视频管理 -->
+		<action name="videoList" class="action.PgAction" method="manageVideo">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="succ" >WEB-INF/content/jsp/user/manage/video_list.jsp</result>
+		</action>
+		<!-- 审核管理 -->
+		<action name="auditList" class="action.PgAction" method="auditManage">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="succ" >WEB-INF/content/jsp/admin/video_list.jsp</result>
+		</action>
+		<!-- 评论管理 -->
+		<action name="commentList" class="action.PgAction" method="manageComment">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="succ" >WEB-INF/content/jsp/user/manage/comment_list.jsp</result>
+		</action>
+		<!-- 类型管理 -->
+		<action name="categoryList" class="action.PgAction" method="manageCategory">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="succ" >WEB-INF/content/jsp/admin/category_list.jsp</result>
+		</action>
+		<!-- 消息管理 -->
+		<action name="messageList" class="action.PgAction" method="messageList">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="succ" >WEB-INF/content/jsp/user/message.jsp</result>
+		</action>
+		
+		<!-- 视频播放页 -->
+		<action name="audit" class="action.VideoAction" method="audit">
+			<result name="index" type="redirect">index</result>
+			<result name="succ" >WEB-INF/content/jsp/admin/video.jsp</result>
+			<result name="list" type="redirect">auditList</result>
+			<result name="sign_in" type="redirect">sign_in</result>
+		</action>
+		
+		
+		<!-- 管理操作（有一些简单的操作，操作完之后直接刷新当前页面的，不刷新页面的全部放在AjaxAction里面） -->
+		<!-- 删除 -->
+		<action name="deleteUser" class="action.PgAction" method="deleteUser">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="succ" type="redirect">userList</result>
+		</action>
+		<action name="deleteVideo" class="action.PgAction" method="deleteVideo">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="succ" type="redirect">videoList</result>
+		</action>
+		<action name="deleteComment" class="action.PgAction" method="deleteComment">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="succ" type="redirect">commentList</result>
+		</action>
+		<action name="deleteCategory" class="action.PgAction" method="deleteCategory">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="succ" type="redirect">categoryList</result>
+		</action>
+		
+		<action name="deleteFromBookmark" class="action.PgAction" method="deleteFromBookmark">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="bookmark" type="redirect">bookmark</result>
+		</action>
+		
+		
+		
+		<!-- 更新 -->
+		<action name="updateCategory" class="action.PgAction" method="updateCategory">
+			<result name="sign_in" type="redirect">sign_in</result>
+			<result name="succ" type="redirect">categoryList</result>
+		</action>
+		
+		<action name="setLevel" class="action.UserAction" method="SetLevel">
+			<result name="succ" type="redirect">index</result>
+		</action>
+
+		
+	</package>
+</struts>
